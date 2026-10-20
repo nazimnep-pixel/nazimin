@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>AzMepCad.AutoCAD</RootNamespace>
+    <UseWindowsForms>false</UseWindowsForms>
+    <UseWPF>false</UseWPF>
+    <!-- Set AUTOCAD_SDK_DIR to folder containing AcDbMgd.dll / AcMgd.dll (see README). -->
+    <AutocadSdkDir Condition="'$(AutocadSdkDir)' == ''">$(AUTOCAD_SDK_DIR)</AutocadSdkDir>
+    <EnableAutocadReferences Condition="'$(EnableAutocadReferences)' == ''">false</EnableAutocadReferences>
+    <EnableAutocadReferences Condition="'$(AutocadSdkDir)' != ''">true</EnableAutocadReferences>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(EnableAutocadReferences)' == 'true'">
+    <Reference Include="AcDbMgd">
+      <HintPath>$(AutocadSdkDir)\AcDbMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcMgd">
+      <HintPath>$(AutocadSdkDir)\AcMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcCoreMgd">
+      <HintPath>$(AutocadSdkDir)\AcCoreMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(EnableAutocadReferences)' != 'true'">
+    <DefineConstants>$(DefineConstants);AZMEP_NO_AUTOCAD_SDK</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AzMepCad.Core\AzMepCad.Core.csproj" />
+  </ItemGroup>
+
+</Project>

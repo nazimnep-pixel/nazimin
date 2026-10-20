@@ -1,0 +1,24 @@
+{
+  "standart": "DIN-EN10255",
+  "qeyd": "Yalnız açıq standart ölçüləri — demo məqsədli; CADprofi məzmunu daxil deyil.",
+  "boru_olculeri": [
+    {
+      "nominal": "DN110",
+      "Diametr_mm": 110.0,
+      "daxili_diametr_mm": 104.6,
+      "divar_qalinligi_mm": 2.7
+    },
+    {
+      "nominal": "DN160",
+      "Diametr_mm": 160.0,
+      "daxili_diametr_mm": 152.4,
+      "divar_qalinligi_mm": 3.8
+    },
+    {
+      "nominal": "DN200",
+      "Diametr_mm": 200.0,
+      "daxili_diametr_mm": 190.8,
+      "divar_qalinligi_mm": 4.6
+    }
+  ]
+}

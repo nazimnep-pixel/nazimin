@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6361F14-175F-4B70-B2B1-A6FD7B7EE457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzMepCad.Core", "src\AzMepCad.Core\AzMepCad.Core.csproj", "{3B4F4D1D-C8A5-4595-A238-F4E2C4A224A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzMepCad.Routing", "src\AzMepCad.Routing\AzMepCad.Routing.csproj", "{69160DD2-A1CE-4F5A-8D0F-E1A15031A199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzMepCad.AutoCAD", "src\AzMepCad.AutoCAD\AzMepCad.AutoCAD.csproj", "{D010BFD5-74EC-4B5D-B647-D69A59CE8BD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzMepCad.Boq", "src\AzMepCad.Boq\AzMepCad.Boq.csproj", "{83CD7B18-9F54-4ECA-B05F-A719129AE782}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzMepCad.UI", "src\AzMepCad.UI\AzMepCad.UI.csproj", "{E991D340-C6B7-495F-80F2-8FAEA0A58C60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED794291-4543-4BD5-8F4C-A107FD6B7A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzMepCad.Core.Tests", "tests\AzMepCad.Core.Tests\AzMepCad.Core.Tests.csproj", "{658CFE45-F045-4E87-94CC-A7CF7B5581AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B4F4D1D-C8A5-4595-A238-F4E2C4A224A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B4F4D1D-C8A5-4595-A238-F4E2C4A224A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B4F4D1D-C8A5-4595-A238-F4E2C4A224A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B4F4D1D-C8A5-4595-A238-F4E2C4A224A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69160DD2-A1CE-4F5A-8D0F-E1A15031A199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69160DD2-A1CE-4F5A-8D0F-E1A15031A199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69160DD2-A1CE-4F5A-8D0F-E1A15031A199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69160DD2-A1CE-4F5A-8D0F-E1A15031A199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D010BFD5-74EC-4B5D-B647-D69A59CE8BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D010BFD5-74EC-4B5D-B647-D69A59CE8BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D010BFD5-74EC-4B5D-B647-D69A59CE8BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D010BFD5-74EC-4B5D-B647-D69A59CE8BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83CD7B18-9F54-4ECA-B05F-A719129AE782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83CD7B18-9F54-4ECA-B05F-A719129AE782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83CD7B18-9F54-4ECA-B05F-A719129AE782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83CD7B18-9F54-4ECA-B05F-A719129AE782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E991D340-C6B7-495F-80F2-8FAEA0A58C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E991D340-C6B7-495F-80F2-8FAEA0A58C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E991D340-C6B7-495F-80F2-8FAEA0A58C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E991D340-C6B7-495F-80F2-8FAEA0A58C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658CFE45-F045-4E87-94CC-A7CF7B5581AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658CFE45-F045-4E87-94CC-A7CF7B5581AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658CFE45-F045-4E87-94CC-A7CF7B5581AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658CFE45-F045-4E87-94CC-A7CF7B5581AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B4F4D1D-C8A5-4595-A238-F4E2C4A224A3} = {C6361F14-175F-4B70-B2B1-A6FD7B7EE457}
+		{69160DD2-A1CE-4F5A-8D0F-E1A15031A199} = {C6361F14-175F-4B70-B2B1-A6FD7B7EE457}
+		{D010BFD5-74EC-4B5D-B647-D69A59CE8BD8} = {C6361F14-175F-4B70-B2B1-A6FD7B7EE457}
+		{83CD7B18-9F54-4ECA-B05F-A719129AE782} = {C6361F14-175F-4B70-B2B1-A6FD7B7EE457}
+		{E991D340-C6B7-495F-80F2-8FAEA0A58C60} = {C6361F14-175F-4B70-B2B1-A6FD7B7EE457}
+		{658CFE45-F045-4E87-94CC-A7CF7B5581AB} = {ED794291-4543-4BD5-8F4C-A107FD6B7A2E}
+	EndGlobalSection
+EndGlobal
