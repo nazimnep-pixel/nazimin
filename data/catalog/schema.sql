@@ -39,6 +39,17 @@ CREATE TABLE IF NOT EXISTS pipe_size_standards (
 
 CREATE INDEX IF NOT EXISTS idx_pipe_size_standards_kod ON pipe_size_standards(standart_kodu);
 
+CREATE TABLE IF NOT EXISTS mep_fittings (
+    id TEXT PRIMARY KEY NOT NULL,
+    nov TEXT NOT NULL,
+    dn_mm REAL NOT NULL,
+    ad TEXT NOT NULL,
+    kod TEXT,
+    material TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_mep_fittings_nov_dn ON mep_fittings(nov, dn_mm);
+
 -- Demo seed: public DIN-style dimensions only (not proprietary catalog data)
 INSERT OR IGNORE INTO mep_standards (id, kod, ad, tesvir) VALUES
     ('std-din-en10255', 'DIN-EN10255', 'DIN EN 10255 (demo)', 'Public reference dimensions for scaffold tests');

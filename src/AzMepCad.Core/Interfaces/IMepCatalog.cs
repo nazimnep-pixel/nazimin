@@ -12,7 +12,21 @@ public interface IMepCatalog
     Task<CatalogComponent?> IdIleGetirAsync(string id, CancellationToken cancellationToken = default);
 
     Task<PipeSizeStandard?> DiametrStandartiniTapAsync(string standartKodu, double diametrMm, CancellationToken cancellationToken = default);
+
+    /// <summary>All nominal pipe sizes for a standard code (e.g. DIN-EN10255).</summary>
+    Task<IReadOnlyList<PipeSizeStandard>> GetPipeSizesAsync(string standard, CancellationToken cancellationToken = default);
+
+    /// <summary>Catalog fitting by type and nominal diameter (mm).</summary>
+    Task<CatalogFitting?> GetFittingAsync(FittingNovu type, double dn, CancellationToken cancellationToken = default);
 }
+
+public sealed record CatalogFitting(
+    string Id,
+    string Ad,
+    string? Kod,
+    FittingNovu Nov,
+    double DnMm,
+    string? Material);
 
 public sealed record CatalogSearchFilter(
     MepDiscipline? Sistem = null,

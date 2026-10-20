@@ -82,4 +82,16 @@
   <data name="StatusReady" xml:space="preserve">
     <value>Hazırdır</value>
   </data>
+  <data name="CategoryHvac" xml:space="preserve">
+    <value>HVAC</value>
+  </data>
+  <data name="CategoryPipe" xml:space="preserve">
+    <value>Boru</value>
+  </data>
+  <data name="CategoryElectrical" xml:space="preserve">
+    <value>Elektrik</value>
+  </data>
+  <data name="CategoryArchitecture" xml:space="preserve">
+    <value>Memarlıq</value>
+  </data>
 </root>

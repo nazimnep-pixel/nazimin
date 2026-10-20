@@ -49,6 +49,52 @@ public class RoutingEngineTests
     }
 
     [Fact]
+    public void Route_TJunction_SuggestsTee()
+    {
+        var request = new RoutingRequest(
+            MepDiscipline.Santexnika,
+            110,
+            new[]
+            {
+                new CenterlinePoint(0, 0, 0),
+                new CenterlinePoint(1000, 0, 0),
+                new CenterlinePoint(2000, 0, 0),
+            },
+            BranchStubs:
+            [
+                new BranchStub(1, new CenterlinePoint(1000, 500, 0)),
+            ]);
+
+        var result = _engine.Route(request);
+
+        Assert.True(result.Ugurlu);
+        Assert.Equal(3, result.Seqmentler.Count);
+        Assert.Contains(result.Fittingler, f => f.Nov == FittingNovu.Te);
+    }
+
+    [Fact]
+    public void Route_DiameterChange_SuggestsReducer()
+    {
+        var request = new RoutingRequest(
+            MepDiscipline.Santexnika,
+            110,
+            new[]
+            {
+                new CenterlinePoint(0, 0, 0, 110),
+                new CenterlinePoint(1000, 0, 0, 110),
+                new CenterlinePoint(2000, 0, 0, 160),
+            });
+
+        var result = _engine.Route(request);
+
+        Assert.True(result.Ugurlu);
+        Assert.Equal(2, result.Seqmentler.Count);
+        var reducer = Assert.Single(result.Fittingler, f => f.Nov == FittingNovu.Reduktor);
+        Assert.Equal(110, reducer.DiametrMm);
+        Assert.Equal(160, reducer.IkinciDiametrMm);
+    }
+
+    [Fact]
     public void Route_SinglePoint_Fails()
     {
         var result = _engine.Route(new RoutingRequest(

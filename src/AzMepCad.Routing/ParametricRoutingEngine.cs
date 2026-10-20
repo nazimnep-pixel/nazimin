@@ -3,7 +3,7 @@ namespace AzMepCad.Routing;
 using AzMepCad.Core.Interfaces;
 
 /// <summary>
-/// Stub routing engine: builds straight segments between points and suggests elbows at direction changes.
+/// Analyzes polyline vertices; emits <see cref="RoutingSegment"/> and <see cref="FittingPlacement"/>.
 /// </summary>
 public sealed class ParametricRoutingEngine : IRoutingEngine
 {
@@ -15,12 +15,12 @@ public sealed class ParametricRoutingEngine : IRoutingEngine
         {
             return new RoutingResult(
                 false,
-                Array.Empty<CenterlineSegment>(),
-                Array.Empty<FittingSuggestion>(),
+                Array.Empty<RoutingSegment>(),
+                Array.Empty<FittingPlacement>(),
                 "Marşrut üçün ən azı iki nöqtə lazımdır.");
         }
 
-        var segments = new List<CenterlineSegment>();
+        var segments = new List<RoutingSegment>();
         for (var i = 0; i < request.Points.Count - 1; i++)
         {
             var start = request.Points[i];
@@ -30,54 +30,116 @@ public sealed class ParametricRoutingEngine : IRoutingEngine
                 continue;
             }
 
-            segments.Add(new CenterlineSegment(start, end, request.DiametrMm, request.Sistem));
+            var diametr = end.DiametrMm ?? start.DiametrMm ?? request.DiametrMm;
+            segments.Add(new RoutingSegment(start, end, diametr, request.Sistem));
+        }
+
+        if (request.BranchStubs is { Count: > 0 })
+        {
+            foreach (var stub in request.BranchStubs)
+            {
+                if (stub.VertexIndex < 0 || stub.VertexIndex >= request.Points.Count)
+                {
+                    continue;
+                }
+
+                var junction = request.Points[stub.VertexIndex];
+                if (SegmentLength(junction, stub.End) < 0.001)
+                {
+                    continue;
+                }
+
+                var diametr = junction.DiametrMm ?? request.DiametrMm;
+                segments.Add(new RoutingSegment(junction, stub.End, diametr, request.Sistem));
+            }
         }
 
         if (segments.Count == 0)
         {
             return new RoutingResult(
                 false,
-                Array.Empty<CenterlineSegment>(),
-                Array.Empty<FittingSuggestion>(),
+                Array.Empty<RoutingSegment>(),
+                Array.Empty<FittingPlacement>(),
                 "Sıfır uzunluqlu seqmentlər.");
         }
 
-        var fittings = SuggestFittings(segments);
+        var fittings = SuggestFittings(segments, request);
         return new RoutingResult(true, segments, fittings);
     }
 
-    public IReadOnlyList<FittingSuggestion> SuggestFittings(IReadOnlyList<CenterlineSegment> segments)
-    {
-        if (segments.Count < 2)
-        {
-            return Array.Empty<FittingSuggestion>();
-        }
+    public IReadOnlyList<FittingSuggestion> SuggestFittings(IReadOnlyList<CenterlineSegment> segments) =>
+        SuggestFittings(
+            segments.Select(s => new RoutingSegment(s.Start, s.End, s.DiametrMm, s.Sistem)).ToList(),
+            null)
+            .Select(f => new FittingSuggestion(f.Nov, f.Yer, f.BucaqDerece, f.DiametrMm))
+            .ToList();
 
-        var fittings = new List<FittingSuggestion>();
+    private IReadOnlyList<FittingPlacement> SuggestFittings(
+        IReadOnlyList<RoutingSegment> segments,
+        RoutingRequest? request)
+    {
+        var fittings = new List<FittingPlacement>();
+        var prefer45 = request?.Options?.Prefer45DegreeElbows ?? false;
+
         for (var i = 0; i < segments.Count - 1; i++)
         {
             var a = segments[i];
             var b = segments[i + 1];
+            if (!PointsEqual(a.End, b.Start))
+            {
+                continue;
+            }
+
+            if (Math.Abs(a.DiametrMm - b.DiametrMm) > 0.01)
+            {
+                fittings.Add(new FittingPlacement(
+                    FittingNovu.Reduktor,
+                    a.End,
+                    0,
+                    a.DiametrMm,
+                    b.DiametrMm));
+                continue;
+            }
+
             var angle = AngleBetweenDegrees(a, b);
             if (angle < DirectionChangeToleranceDegrees)
             {
                 continue;
             }
 
-            var prefer45 = false;
             var nov = prefer45 && Math.Abs(angle - 45) < Math.Abs(angle - 90)
                 ? FittingNovu.Bucaq45
                 : FittingNovu.Bucaq90;
 
-            fittings.Add(new FittingSuggestion(
-                nov,
-                a.End,
-                angle,
-                a.DiametrMm));
+            fittings.Add(new FittingPlacement(nov, a.End, angle, a.DiametrMm));
+        }
+
+        if (request?.BranchStubs is { Count: > 0 })
+        {
+            foreach (var stub in request.BranchStubs)
+            {
+                if (stub.VertexIndex < 0 || stub.VertexIndex >= request.Points.Count)
+                {
+                    continue;
+                }
+
+                var junction = request.Points[stub.VertexIndex];
+                var diametr = junction.DiametrMm ?? request.DiametrMm;
+                fittings.Add(new FittingPlacement(
+                    FittingNovu.Te,
+                    junction,
+                    90,
+                    diametr));
+            }
         }
 
         return fittings;
     }
+
+    private static bool PointsEqual(CenterlinePoint a, CenterlinePoint b) =>
+        Math.Abs(a.X - b.X) < 0.001
+        && Math.Abs(a.Y - b.Y) < 0.001
+        && Math.Abs(a.Z - b.Z) < 0.001;
 
     private static double SegmentLength(CenterlinePoint start, CenterlinePoint end)
     {
@@ -87,7 +149,7 @@ public sealed class ParametricRoutingEngine : IRoutingEngine
         return Math.Sqrt(dx * dx + dy * dy + dz * dz);
     }
 
-    private static double AngleBetweenDegrees(CenterlineSegment first, CenterlineSegment second)
+    private static double AngleBetweenDegrees(RoutingSegment first, RoutingSegment second)
     {
         var v1 = Normalize(
             first.End.X - first.Start.X,

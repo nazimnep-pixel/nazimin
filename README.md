@@ -71,9 +71,19 @@ sqlite3 data/catalog/azmep.db < data/catalog/schema.sql
 
 Demo pipe sizes: [data/catalog/seed/demo-pipe-sizes.json](data/catalog/seed/demo-pipe-sizes.json) (public DIN-style dimensions only).
 
+## AutoCAD commands (az-AZ)
+
+| Command | Description |
+|---------|-------------|
+| `AZMEP_BORU` | Draw pipe centerline segments with routing + AZMEP XData |
+| `AZMEP_SPESIFIKASIYA` | Scan model space, export BOQ Excel (Borular / Armatur sheets) |
+
+Load with `NETLOAD` → `AzMepCad.AutoCAD.dll` (Windows + SDK build). See [docs/istifade-qaydasi.md](docs/istifade-qaydasi.md).
+
 ## Documentation
 
-- [docs/architecture.md](docs/architecture.md) — modules, data model, roadmap (EN + AZ)
+- [docs/architecture.md](docs/architecture.md) — modules, usage flow, roadmap (EN + AZ)
+- [docs/istifade-qaydasi.md](docs/istifade-qaydasi.md) — quraşdırma, NETLOAD, əmrlər (az-AZ)
 - [docs/phase1-discovery.md](docs/phase1-discovery.md) — Windows checklist for mapping `C:\Program Files\CADprofi` structure (**do not commit proprietary DB content**)
 
 ## License

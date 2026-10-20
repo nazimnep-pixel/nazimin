@@ -28,3 +28,27 @@ Without `AUTOCAD_SDK_DIR`, the project builds in **stub mode** (`AZMEP_NO_AUTOCA
 - **ZWCAD**: ZWCAD .NET API (separate refs; Phase 2 adapter).
 
 See root `docs/architecture.md` for .NET Framework 4.8 fallback on older hosts.
+
+## Commands
+
+- `AZMEP_BORU` — polyline centerline routing, creates `Line` entities with AZMEP XData
+- `AZMEP_SPESIFIKASIYA` — BOQ export via `AutocadBoqScanner` + `ClosedXmlBoqExporter`
+
+## Hosting the WPF palette
+
+AutoCAD palette integration (Phase 2 wiring):
+
+```csharp
+// In AzMepPlugin.Initialize or a dedicated command:
+using Autodesk.Windows;
+using AzMepCad.UI.Palette;
+
+var palette = new PaletteSet("AzMEP")
+{
+    Style = PaletteSetStyles.ShowPropertiesMenu | PaletteSetStyles.ShowAutoHideButton,
+};
+palette.Add("MEP", new MepPaletteControl());
+palette.Visible = true;
+```
+
+Reference `AzMepCad.UI` from the AutoCAD project when enabling the palette on Windows.

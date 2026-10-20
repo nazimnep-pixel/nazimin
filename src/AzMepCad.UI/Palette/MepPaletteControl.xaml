@@ -15,7 +15,11 @@
                Margin="0,0,0,8"/>
     <TabControl Grid.Row="1">
       <TabItem x:Name="RoutingTab"/>
-      <TabItem x:Name="CatalogTab"/>
+      <TabItem x:Name="CatalogTab">
+        <ListBox x:Name="CategoryList"
+                 DisplayMemberPath="DisplayName"
+                 MinHeight="120"/>
+      </TabItem>
       <TabItem x:Name="BoqTab"/>
     </TabControl>
     <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">

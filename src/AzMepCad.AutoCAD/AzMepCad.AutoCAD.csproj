@@ -34,6 +34,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AzMepCad.Core\AzMepCad.Core.csproj" />
+    <ProjectReference Include="..\AzMepCad.Routing\AzMepCad.Routing.csproj" />
+    <ProjectReference Include="..\AzMepCad.Boq\AzMepCad.Boq.csproj" />
   </ItemGroup>
+
+  <PropertyGroup Condition="'$(EnableAutocadReferences)' == 'true'">
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
 
 </Project>

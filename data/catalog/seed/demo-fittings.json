@@ -1,0 +1,37 @@
+{
+  "qeyd": "Demo armatur — açıq standart ölçüləri; CADprofi məzmunu yoxdur.",
+  "armaturlar": [
+    {
+      "id": "elbow-90-dn110",
+      "nov": "Bucaq90",
+      "dn_mm": 110,
+      "ad": "90° dirsek DN110",
+      "kod": "EL90-110",
+      "material": "PE100"
+    },
+    {
+      "id": "elbow-90-dn160",
+      "nov": "Bucaq90",
+      "dn_mm": 160,
+      "ad": "90° dirsek DN160",
+      "kod": "EL90-160",
+      "material": "PE100"
+    },
+    {
+      "id": "tee-dn110",
+      "nov": "Te",
+      "dn_mm": 110,
+      "ad": "T-adapter DN110",
+      "kod": "TE-110",
+      "material": "PE100"
+    },
+    {
+      "id": "reducer-110-160",
+      "nov": "Reduktor",
+      "dn_mm": 110,
+      "ad": "Reduktor DN110→DN160",
+      "kod": "RED-110-160",
+      "material": "PE100"
+    }
+  ]
+}

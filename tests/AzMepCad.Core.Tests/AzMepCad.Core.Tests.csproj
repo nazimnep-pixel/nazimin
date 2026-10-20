@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\AzMepCad.Core\AzMepCad.Core.csproj" />
     <ProjectReference Include="..\..\src\AzMepCad.Routing\AzMepCad.Routing.csproj" />
+    <ProjectReference Include="..\..\src\AzMepCad.Boq\AzMepCad.Boq.csproj" />
   </ItemGroup>
 
 </Project>

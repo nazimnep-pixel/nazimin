@@ -24,6 +24,10 @@ public static class Strings
     public static string ButtonRoute => Get("ButtonRoute");
     public static string ButtonExportBoq => Get("ButtonExportBoq");
     public static string StatusReady => Get("StatusReady");
+    public static string CategoryHvac => Get("CategoryHvac");
+    public static string CategoryPipe => Get("CategoryPipe");
+    public static string CategoryElectrical => Get("CategoryElectrical");
+    public static string CategoryArchitecture => Get("CategoryArchitecture");
 
     private static string Get(string name) =>
         ResourceManager.GetString(name, _culture ?? CultureInfo.CurrentUICulture) ?? name;
