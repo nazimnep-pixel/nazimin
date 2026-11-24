@@ -29,6 +29,9 @@
       <HintPath>$(AcadDir)\AdWindows.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup>

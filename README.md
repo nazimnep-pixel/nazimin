@@ -2,4 +2,4 @@
 
 AutoCAD tooling for CADprofi knowledge extraction.
 
-- **Project:** [`CadprofiScanner/`](CadprofiScanner/) — `AZM_SCAN_ALL` autonomous scanner (`AzmFullAutoScanner.cs`).
+- **Project:** [`CadprofiScanner/`](CadprofiScanner/) — four-engine autonomous scanner (`LeafDiscoveryEngine`, `GeometryXRayEngine`, `UiWatchdogHelpers`, `DesktopJsonCheckpoints`).
